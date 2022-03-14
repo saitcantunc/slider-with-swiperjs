@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+		<link rel="stylesheet" href="./assets/style.css" />
+		<title>Slider</title>
+		<style></style>
+	</head>
+	<body>
+		<!-- Swiper -->
+		<div class="swiper mySwiper">
+			<div class="swiper-wrapper"></div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-pagination"></div>
+		</div>
+		<!-- Swiper JS -->
+		<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+		<script type="module">
+			import data from "./image.json" assert { type: "json" };
+
+			var swiper = new Swiper(".mySwiper", {
+				speed: 1000,
+				spaceBetween: 50,
+				loadPrevNext: true,
+				preloadImage: false,
+				lazy: true,
+				effect: "coverflow",
+				grabCursor: false,
+				centeredSlides: true,
+				slidesPerView: "auto",
+				coverflowEffect: {
+					rotate: 50,
+					stretch: 0,
+					depth: 250,
+					modifier: 1,
+					slideShadows: true,
+				},
+				pagination: {
+					el: ".swiper-pagination",
+					clickable: true,
+				},
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+			});
+
+			const slider = document.querySelector(".swiper-wrapper");
+			console.log(data.length);
+			for (let i = 0; i < data.length; i++) {
+				slider.innerHTML += `
+                    <div class="swiper-slide">
+					    <img data-src="${data[i].url}" class="swiper-lazy" />
+					    <div class="swiper-lazy-preloader"></div>
+				    </div>
+                `;
+			}
+		</script>
+	</body>
+</html>
